@@ -1,7 +1,7 @@
 /// <reference types="cypress" />
 
 
-describe('First Test', ()=> {
+describe('UI Tests', ()=> {
 
     Cypress.on('uncaught:exception', (err, runnable) => {
         // returning false here prevents Cypress from

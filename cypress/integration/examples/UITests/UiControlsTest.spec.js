@@ -18,7 +18,10 @@ cy.get('@TextBox').then(($txtbox) => {
 
 // Click on Hide to verify input control is not visible on page
  cy.get('#hide-textbox').click({force: true})
- cy.log('style attrib value post hiding is: '+ cy.get('@TextBox').attribute('style'))
+ //
+ cy.wrap(cy.get('@TextBox').attribute('style'))
+ cy.get('@TextBox').attribute('style').should('contain','display: none;')
+ cy.get('@TextBox').invoke('attr','style').should('contain','display: none;')
  cy.get('@TextBox').then($text => {
     expect($text).to.have.attr('style','display: none;')
  })

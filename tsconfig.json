@@ -4,7 +4,7 @@
     "cypress/*/*.ts"
   ],
   "compilerOptions": {
-    "types": ["cypress","node"],
+    "types": ["cypress-commands","cypress","node"],
     "typeRoots": [ "../node_modules/@types" ]
 }
   

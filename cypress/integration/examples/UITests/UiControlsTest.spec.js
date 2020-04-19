@@ -65,13 +65,14 @@ it('Test Folating DDL', () =>{
     cy.get('.ui-menu-item-wrapper').contains('Tanzania').click()
 })
 
+// Mouse Hover for css property elements
 it('MouseHover', ()=>{
-    cy.get('#mousehover').trigger('mouseover')
-    cy.get('.mouse-hover>.mouse-hover-content>a').contains('Reload').click()
-    cy.get('#mousehover').trigger('mouseover')
-    cy.get('.mouse-hover>.mouse-hover-content>a').contains('Top').click()
+    cy.get('.mouse-hover .mouse-hover-content a:nth-child(1)').click({force:true})
+    cy.get('.mouse-hover .mouse-hover-content a:nth-child(2)').click({force:true})
+    //cy.get('.mouse-hover .mouse-hover-content a:nth-child(1)').invoke('show').should('be.visible')//contains('Reload').click()
 })
 
+// Invokes a custom command created in support>commands.js
 it('Read Table Data', ()=>{
     cy.log(cy.ReadDataFromTable('#product>tbody>tr',8,'Course'))
 })

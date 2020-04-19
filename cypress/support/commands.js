@@ -25,3 +25,12 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 import 'cypress-wait-until';
 import "cypress-localstorage-commands";
+import 'cypress-iframe';
+
+Cypress.Commands.add('ReadDataFromTable',(tableHeadersId,rowNum,headerName) => {
+      cy.get(tableHeadersId+":nth-child(1)").contains(headerName).then(function(header){
+        var colindex = header.index(this)
+        // Get to the row and then the col and get the text
+        return cy.get(tableHeadersId).find('tr').eq(rowNum).find('td').eq(colindex).text()
+      })
+})

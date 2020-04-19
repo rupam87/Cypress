@@ -1,4 +1,6 @@
 /// <reference types="cypress" />
+///<reference types="cypress-iframe" /> 
+
 
 context('Testing Controls on AutomationPractice', ()=>{
 
@@ -65,4 +67,16 @@ it('Test Folating DDL', () =>{
     cy.get('.ui-menu-item-wrapper').contains('Tanzania').click()
 })
 
+it('MouseHover', ()=>{
+    cy.get('#mousehover').trigger('mouseover')
+    cy.get('.mouse-hover>.mouse-hover-content>a').contains('Reload').click()
+    cy.get('#mousehover').trigger('mouseover')
+    cy.get('.mouse-hover>.mouse-hover-content>a').contains('Top').click()
 })
+
+it('Read Table Data', ()=>{
+    cy.log(cy.ReadDataFromTable('#product>tbody>tr',8,'Course'))
+})
+
+})
+

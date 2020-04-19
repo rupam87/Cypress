@@ -1,0 +1,6 @@
+
+#Exceptions
+*.MP4
+node_modules
+videos
+screenshots

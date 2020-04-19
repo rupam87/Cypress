@@ -1,37 +1,59 @@
-## Welcome to GitHub Pages
+# Devs
+Repo for Automation
 
-You can use the [editor on GitHub](https://github.com/rupam87/Devs/edit/master/README.md) to maintain and preview the content for your website in Markdown files.
+Look for folders inside 'cypress\integration\examples' to find API and UI tests.
 
-Whenever you commit to this repository, GitHub Pages will run [Jekyll](https://jekyllrb.com/) to rebuild the pages in your site, from the content in your Markdown files.
+CYPRESS.io Set up
 
-### Markdown
+Cypress Plugins To Install :
+===========================
+ cypress-wait-until
+ cypress-localstorage-commands
+ cypress-xpath
+ Cypress-commands
 
-Markdown is a lightweight and easy-to-use syntax for styling your writing. It includes conventions for
+Enable TypeScript Support :
+=========================
+Refer - https://github.com/bahmutov/add-typescript-to-cypress
 
-```markdown
-Syntax highlighted code block
+Enable Support for XML Parsing from XML File :
+==============================================
+Install DomXml from - https://www.npmjs.com/package/xmldom
 
-# Header 1
-## Header 2
-### Header 3
+tsconfig.json  must include the below 
+"compilerOptions": {
+    "types": ["node"],
+    "typeRoots": [ "../node_modules/@types" ]
+}
 
-- Bulleted
-- List
+Sample usage below :
+declare var require: NodeRequire;
+it('Invoke ADD', () => {   cy.readFile('cypress/../../Request_Add.xml','utf-8').then(text =>{
+       cy.log(text);
+       var DOMParser = require('xmldom').DOMParser;
+       var doc = new DOMParser().parseFromString(text);
+       doc.getElementsByTagName("tem:intA")[0].textContent = '2';
+       doc.getElementsByTagName("tem:intB")[0].textContent = '55';
+       cy.log(doc.toString()); });
+       })
 
-1. Numbered
-2. List
+JSON Parsing in TypeScript from API response :
+==============================================
+it('Query url for name squirtle', () => 
+    { cy.get('@GetPoke').then((response) => 
+        { var url = (<any>response).body.results.filter(f => f.name === 'squirtle')[0].url;
+            cy.log("Url for Squirtel : "+ JSON.stringify(url));
+            cy.request('GET',url).then((response) => 
+            {
+                cy.log("Printing all Abilities Results ==>");
+                (<any>response).body.abilities.forEach(e => cy.log(e.ability));
+                var url2 = (<any> response).body.game_indices.filter(a => a.version.name === 'white-2')[0].version.url;
+                cy.log("Url for white-2 : "+ JSON.stringify(url2));
+            })
+        })        
+    })
 
-**Bold** and _Italic_ and `Code` text
 
-[Link](url) and ![Image](src)
-```
-
-For more details see [GitHub Flavored Markdown](https://guides.github.com/features/mastering-markdown/).
-
-### Jekyll Themes
-
-Your Pages site will use the layout and styles from the Jekyll theme you have selected in your [repository settings](https://github.com/rupam87/Devs/settings). The name of this theme is saved in the Jekyll `_config.yml` configuration file.
-
-### Support or Contact
-
-Having trouble with Pages? Check out our [documentation](https://help.github.com/categories/github-pages-basics/) or [contact support](https://github.com/contact) and we’ll help you sort it out.
+RUN Cypress tests from cmd :
+============================
+C:\Cypress.io\Devs>node_modules\.bin\cypress run --record --key 10e834ca-e8dc-4dd3-a150-7ccf165fd15c --spec "cypress\integration\examples\**\*"

@@ -1,0 +1,11 @@
+{
+  "include": [
+    "node_modules/cypress",
+    "cypress/*/*.ts"
+  ],
+  "compilerOptions": {
+    "types": ["cypress-commands","cypress","node"],
+    "typeRoots": [ "../node_modules/@types" ]
+}
+  
+}

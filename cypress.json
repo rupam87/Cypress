@@ -1,0 +1,10 @@
+{
+    "projectId": "esph2s",
+    "baseUrl" : "https://pokeapi.co/",
+    "defaultCommandTimeout": 5000,
+    "pageLoadTimeout" : 10000,
+    "requestTimeout" : 30000,
+    "responseTimeout" : 60000,
+    "viewportHeight" : 760,
+    "viewportWidth" : 1240
+}

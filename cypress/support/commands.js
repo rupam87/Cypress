@@ -27,10 +27,13 @@ import 'cypress-wait-until';
 import "cypress-localstorage-commands";
 //import 'cypress-iframe';
 
+// Reads Specific cell data from Table given paramters - TableHeaderId, Row Number (int) and ColHeaderName
 Cypress.Commands.add('ReadDataFromTable',(tableHeadersId,rowNum,headerName) => {
       cy.get(tableHeadersId+":nth-child(1)").contains(headerName).then(function(header){
-        var colindex = header.index(this)
-        // Get to the row and then the col and get the text
-        return cy.get(tableHeadersId).find('tr').eq(rowNum).find('td').eq(colindex).text()
+        cy.wrap(header).invoke('index').should('be.greaterThan', -1)
+        cy.wrap(header).invoke('index').then((idx) =>{
+          // Get to the row and then the col and get the text
+          return cy.get(tableHeadersId).eq(rowNum).find('td').eq(idx).text()
+        })
       })
 })

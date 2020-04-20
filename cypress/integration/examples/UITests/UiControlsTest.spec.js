@@ -74,7 +74,9 @@ it('MouseHover', ()=>{
 
 // Invokes a custom command created in support>commands.js
 it('Read Table Data', ()=>{
-    cy.log(cy.ReadDataFromTable('#product>tbody>tr',8,'Course'))
+    cy.ReadDataFromTable('#product>tbody>tr',8,'Course').then(res =>{
+        cy.log("Table Data for 8th Row, Course Column : " + res)
+    })
 })
 
 })

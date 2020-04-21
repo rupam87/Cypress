@@ -1,49 +1,49 @@
 /// <reference types="cypress" />
+import AtmnPrac from './PageObjects/AtmnPrac'
 
 context('Testing Controls on AutomationPractice', ()=>{
 
 beforeEach(()=>{
     cy.visit("https://www.rahulshettyacademy.com/AutomationPractice/");
-    cy.log("Navigated to Practice Page!!")
+    cy.log("Navigated to Practice Page!!")    
 })
 
 it('Test IO Text', () =>{
 // Set and Get Text
-cy.get('#displayed-text').as('TextBox')
-cy.get('@TextBox').type('Test Input').wait(1000)
-
-cy.get('@TextBox').then(($txtbox) => { 
+const pracPage = new AtmnPrac();
+pracPage.getInputTextBox().type('Test Input').wait(1000)
+pracPage.getInputTextBox().then(($txtbox) => { 
     expect($txtbox).to.have.value('Test Input')
 })
 
 // Click on Hide to verify input control is not visible on page
  cy.get('#hide-textbox').click({force: true})
- cy.get('@TextBox').attribute('style').should('contain','display: none;')
- cy.get('@TextBox').invoke('attr','style').should('contain','display: none;')
- cy.get('@TextBox').should('have.attr','style','display: none;')
- cy.get('@TextBox').then($text => {
+ pracPage.getInputTextBox().attribute('style').should('contain','display: none;')
+ pracPage.getInputTextBox().invoke('attr','style').should('contain','display: none;')
+ pracPage.getInputTextBox().should('have.attr','style','display: none;')
+ pracPage.getInputTextBox().then($text => {
     expect($text).to.have.attr('style','display: none;')
  })
 
  // Click on Show to verify control is visible
  cy.get('#show-textbox').click({force: true})
- cy.get('@TextBox').then($text => {
+ pracPage.getInputTextBox().then($text => {
     expect($text).to.have.attr('style','display: block;')
  }) 
 })
 
 it('Test CheckBox', () => {
-    cy.get('input[type=\'checkbox\']').as('checkboxElements')
+    const pracPage = new AtmnPrac();  
     cy.log('Traverse through all the options of the CB and check them')
-    cy.get('@checkboxElements').each(($cb, index, $list) =>{
+    pracPage.getCheckBoxElements().each(($cb, index, $list) =>{
         cy.wrap($cb).check().should('be.checked')        
     })
 
     cy.log('Check an option based on the value \'option3\'')
-    cy.get('@checkboxElements').check('option3')
+    pracPage.getCheckBoxElements().check('option3')
 
     cy.log('Filters the list for \'option1\ and then uncheks the specified CB')
-    cy.get('@checkboxElements').filter('[value=\'option1\']').uncheck().should('not.be.checked')
+    pracPage.getCheckBoxElements().filter('[value=\'option1\']').uncheck().should('not.be.checked')
     })
 
 it('Test Select DDL', () =>{
@@ -73,10 +73,16 @@ it('MouseHover', ()=>{
 })
 
 // Invokes a custom command created in support>commands.js
-it('Read Table Data', ()=>{
-    cy.ReadDataFromTable('#product>tbody>tr',8,'Course').then(res =>{
+it('Read Table Data', ()=>{    
+    cy.ReadDataFromTable('#product tbody tr',8,'Course').then(res =>{
         cy.log("Table Data for 8th Row, Course Column : " + res)
     })
+})
+
+it('Interact with iFrames', () => {
+    cy.GetIFrameBody('#courses-iframe').as('iframe')
+    cy.get('@iframe').find('.header-upper .main-menu div:nth-child(2) ul').contains('Practice Projects').click()
+    cy.get('@iframe').xpath('//h2[contains(text(),\'Join now to Practice\')]').should('be.visible')
 })
 
 })

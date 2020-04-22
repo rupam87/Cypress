@@ -1,26 +1,15 @@
-class HomePage{
+class HomePage {
 
-   goToPage()
-   {
-       cy.visit('http://automationpractice.com/');
-       isPageLoaded();
-   }
-
-    isPageLoaded()
-    {
-        cy.waitUntil(()=>{
-         cy.url().should('have.text','/index.php?controller=my-account')
-        }, 
-        {
-          errorMsg: 'Wait for Home Page to load failed',
-          timeout: 10000,
-          interval:1000
-        })        
+    emailTxtField() {
+        return cy.get('#email')
     }
 
-    tShirtsElement()
-    {
-       return cy.get('#block_top_menu .sf-menu.clearfix.menu-content.sf-js-enabled.sf-arrows > li:nth-child(3)')
+    pwdTxtField() {
+        return cy.get('#passwd')
+    }
+
+    submitLoginButton() {
+        return cy.get('#SubmitLogin')
     }
 }
 

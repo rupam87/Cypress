@@ -1,32 +1,16 @@
-class LandingPage{
+class LandingPage {
 
-signInLink()
-{
-   cy.get('.header_user_info .login').should('be.visible').then((obj)=>{
-       return obj
-   })
-}
+    goToPage() {
+        return cy.visit('http://automationpractice.com/')
+    }
 
-emailTxtField()
-{
-   cy.get('#email').should('be.visible').then((obj)=>{
-       return obj
-   })
-}
+    isPageLoaded() {
+        return cy.wrap(cy.url()).should('include', '/index.php')
+    }
 
-pwdTxtField()
-{
-   cy.get('#passwd').should('be.visible').then((obj)=>{
-       return obj
-   })
-}
-
-submitLoginButton()
-{
-   cy.get('#SubmitLogin').should('be.visible').then((obj)=>{
-       return obj
-   })
-}
+    signInLink() {
+        return cy.get('.header_user_info .login')
+    }  
 
 }
 

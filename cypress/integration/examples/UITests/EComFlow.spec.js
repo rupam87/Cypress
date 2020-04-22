@@ -11,6 +11,7 @@ let macHomePage = new MyAccHomePage();
 describe('E2E e-Commerce Checkout Flow', ()=>{
 
 before(function(){
+    Cypress.config('pageLoadTimeout',60000)
     cy.fixture('AutomationPracticeInputs.json').then(function(data){
         inputJsonData = data;
     })    

@@ -1,5 +1,5 @@
 /// <reference types="cypress" />
-import AtmnPrac from './PageObjects/AtmnPrac'
+import AtmnPrac from '../../../support/UITests/PageObjects/AtmnPrac'
 
 let jsonData;
 

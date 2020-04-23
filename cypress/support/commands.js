@@ -44,3 +44,15 @@ Cypress.Commands.add('GetIFrameBody', (frameSel) => {
     return $frame.contents().find('body')
   })
 })
+
+Cypress.Commands.add('GetRows', (tableSel) =>{
+  return cy.get(tableSel).find('tbody tr')
+})
+
+Cypress.Commands.add('GetRow', (tableSel, rowNum) =>{
+  return cy.get(tableSel).find('tbody tr:nth-child('+ rowNum +')')
+})
+
+Cypress.Commands.add('GetCellFromRow', (colName) =>{
+  return cy.get('td.cart_' + colName.toLowerCase())
+})

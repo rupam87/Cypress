@@ -1,4 +1,8 @@
-class HomePage {
+class HomePage {    
+    
+    getUrl(){
+        return '/index.php?controller=authentication&back=my-account'
+    }
 
     emailTxtField() {
         return cy.get('#email')

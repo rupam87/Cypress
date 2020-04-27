@@ -33,7 +33,7 @@ cy.log('inside API Suite')
             (<any>response).body.results.filter(n => n.name.startsWith("b")).forEach(e => cy.log(e))        
         });
     })  
-
+    
     it('Query url for name squirtle', () => 
     {         
         cy.get('@GetPoke').then((response) => 
@@ -49,7 +49,6 @@ cy.log('inside API Suite')
             })
         })        
     })
-
 })
 
 // Tests for Jsonplaceholder API
@@ -94,6 +93,40 @@ context('Rest API on jsonplaceholder.typicode.com', () =>
             expect((<any>response).body.id).to.eq(1);
             cy.log('response statusText : ' + (<any>response).statusText);
         }) 
+    })  
+
+    it('Placeolder PUT - Update User', () =>{
+        cy.readFile('cypress/integration/examples/RestApi/RequestJSONs/PlaceholderPostRequest.json').then((contents) =>{
+            contents.title = 'testTitle';
+            contents.body = 'testBody';
+            contents.userId = 201;
+            // First Create the User to be updated
+            cy.request({
+                method: 'POST',
+                url: 'https://jsonplaceholder.typicode.com/posts',
+                headers: {
+                  'Content-Type' : 'text/json'
+                },
+                body : JSON.stringify(contents)
+            }).then(postResponse =>{
+                expect(postResponse.status).to.eq(201);
+                expect(postResponse.body.id).to.eq(101);
+                cy.log("POST response: " + JSON.stringify(postResponse.body));
+
+                // Update the user now from the response object.
+                cy.request({
+                    method : 'PUT',
+                    url : 'https://jsonplaceholder.typicode.com/posts/1',
+                    headers : {
+                        'Content-Type' : 'text/json'
+                    },
+                    body : postResponse.body
+                }).then(putResponse => {
+                    expect(putResponse.status).to.be.eq(200);
+                    cy.log("PUT response: " + JSON.stringify(putResponse.body));
+                })
+            })
+        })
     })
 
 })

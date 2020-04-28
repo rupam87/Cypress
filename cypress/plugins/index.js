@@ -7,7 +7,11 @@ module.exports = on => {
   on('task', {
     getExcelAsJSON(xlsxFileName) {
       return excelToJson({
-        sourceFile: xlsxFileName
+        sourceFile: xlsxFileName,
+        header:{
+          // Is the number of rows that will be skipped and will not be present at our result object. Counting from top to bottom
+          rows: 1 
+      }
       })
     }
   })

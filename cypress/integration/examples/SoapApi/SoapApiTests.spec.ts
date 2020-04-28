@@ -28,10 +28,10 @@ describe('API Suite for SOAP calls', () =>
                         body: reqDocXml.toString()
                     }).then((response) => 
                     {
-                        expect((<any>response).status).to.eq(200);
-                        cy.log((<any>response).body);
+                        expect(response.status).to.eq(200);
+                        cy.log(response.body);
                         // Get the Add Result and verify it (2 + 55 = 57)
-                        var resDocXml = new DOMParser().parseFromString((<any>response).body);
+                        var resDocXml = new DOMParser().parseFromString(response.body);
                         expect(resDocXml.getElementsByTagName("AddResult")[0].textContent).to.eq('57');
                     })
            })

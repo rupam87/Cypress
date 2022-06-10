@@ -15,8 +15,14 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import 'cypress-axe'
+import 'cypress-mochawesome-reporter/register';
 
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
 require('cypress-xpath')
 require('cypress-commands');
+require('chai');
+require('axe-core');
+require('cypress-axe');
+require('cypress-grep')();

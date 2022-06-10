@@ -1,10 +1,31 @@
 {
-    "projectId": "esph2s",
-    "baseUrl" : "https://pokeapi.co/",
+    "projectId": "esph2s",    
     "defaultCommandTimeout": 5000,
     "pageLoadTimeout" : 30000,
     "requestTimeout" : 30000,
     "responseTimeout" : 60000,
     "viewportHeight" : 760,
-    "viewportWidth" : 1240
+    "viewportWidth" : 1240,
+    "env" : {
+        "TargetEnvToRun" : "dev",
+        "qa": {
+                "app_url" : "https://rahulshettyacademy.com/angularpractice/"
+        },
+        "dev" : {
+            "app_url" : "https://rahulshettyacademy.com/seleniumPractise/#/"
+        }
+    },
+    "retries" :{
+        "runMode": 2,
+        "openMode": 0
+    },
+    "reporter": "cypress-mochawesome-reporter",
+    "reporterOptions": {
+                        "reportDir": "cypress/reports",
+                        "charts": true,
+                        "reportPageTitle": "My Test Suite",
+                        "embeddedScreenshots": true,
+                        "inlineAssets": true
+     },
+    "video": false
 }

@@ -36,17 +36,16 @@ selectCheckBox(label, mode){
 
 handleJSAlert(name){
     this.elements.nameTextBox().type(name);
-    this.elements.alertBtn().click();
     // verify alert
     cy.on('window:alert', (str) => {
         assert.equal(str,"Hello " + name + ", share this practice page and share your knowledge");
     })
     cy.on('window:alert', () => true);
+    this.elements.alertBtn().click();
 }
 
 handleJSConfPopup(name, option){
     this.elements.nameTextBox().type(name);
-    this.elements.confirmBtn().click();
     // verify Confirmation pop up
     cy.on('window:confirm', (str) => {
         assert.equal(str, "Hello " + name + ", Are you sure you want to confirm?");
@@ -55,6 +54,8 @@ handleJSConfPopup(name, option){
         cy.on('window:confirm', () => true);
     else
         cy.on('window:confirm', () => false);
+        
+    this.elements.confirmBtn().click();
     
 }
 

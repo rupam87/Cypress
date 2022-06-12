@@ -1,6 +1,6 @@
 {
     "projectId": "esph2s",    
-    "defaultCommandTimeout": 5000,
+    "defaultCommandTimeout": 10000,
     "pageLoadTimeout" : 30000,
     "requestTimeout" : 30000,
     "responseTimeout" : 60000,

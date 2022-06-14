@@ -1,3 +1,5 @@
+import { Assertion } from "chai";
+
 class PracticePage{
 
 elements = {
@@ -60,14 +62,33 @@ handleJSConfPopup(name, option){
 }
 
 handleNewTab(){
-    this.elements.openNewTabBtn().invoke('removeAttr','_target');
-    this.elements.openNewTabBtn().click();
-    cy.url().should('be.eq','https://www.rahulshettyacademy.com/'  )
-    cy.xpath(".//div[contains(@class,'header-text')]//h2/span").invoke('attr','outerText').should('contain','An Academy to Learn Earn & Shine  in your QA Career')
+    this.elements.openNewTabBtn().invoke('removeAttr','target').click();
+    cy.url().should('be.eq','https://www.rahulshettyacademy.com/')
+    cy.xpath(".//div[contains(@class,'header-text')]//h2/span").invoke('prop','outerText').then((oText) => {
+        var actStrippedTxt = (oText).replace(/ /g,'').toLowerCase();
+        var expStrippedTxt = "An Academy to Learn Earn & Shine \u00a0 in your QA Career".replace(/ /g,'').toLowerCase();
+        assert.equal(actStrippedTxt,expStrippedTxt);
+    })
+    
+    cy.go('back');
 }
 
-handleNewWindow(){
+handleNewWindow(url){
 
+    // Stub the Window Object's Open function to open the 
+    // given url when called.
+    cy.window().then((win) => {
+        cy.stub(win, 'open').callsFake((url) => {
+            win.location.href = url;
+        }).as("popup")
+    })
+
+    // Clicking the new window btn on the app opens a new window
+    // but we're calling the alias for the stubbed window object
+    // to open the url in the same window
+    this.elements.openNewWinBtn().click()
+    cy.get('@popup').should("be.called");
+    
 }
 
 }

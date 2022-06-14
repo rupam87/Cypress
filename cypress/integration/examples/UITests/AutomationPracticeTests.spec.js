@@ -20,9 +20,8 @@ it('Test All Controls', () => {
 
 it('Test Windows and Tabs', () => {
    
-    pracPage.handleJSAlert('Madhu');
-    pracPage.handleJSConfPopup('Madhu', 'cancel');
-    //pracPage.handleNewTab()
+    pracPage.handleNewTab();
+    pracPage.handleNewWindow('http://www.qaclickacademy.com/');
 })
 
 })

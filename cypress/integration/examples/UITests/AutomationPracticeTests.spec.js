@@ -27,14 +27,23 @@ it('Test Windows and Tabs', () => {
 })
 
 
-describe('File Download/Upload', () => {
+describe('File Download/Upload', () => {   
 
-    describe('Example to demonstrate file download in cypress', function () {
-
-        it('File Download using cypress-downloadfile npm package', () => {
-            cy.downloadFile('https://www.learningcontainer.com/wp-content/uploads/2020/04/sample-text-file.txt',
-                'cypress/fixtures/Download', 'test.txt')
-            cy.readFile('cypress/fixtures/Download/test.txt').should('contain', 'Lorem ipsum dolor sit amet')    
-        })
+    it('File Download using cypress-downloadfile npm package', () => {
+        cy.downloadFile('https://www.learningcontainer.com/wp-content/uploads/2020/04/sample-text-file.txt',
+            'cypress/fixtures/Download', 'test.txt')
+        cy.readFile('cypress/fixtures/Download/test.txt').should('contain', 'Lorem ipsum dolor sit amet')    
     })
+
+    it('File upload example', () => {
+        cy.visit('https://practice.automationbro.com/cart/');
+        cy.xpath(".//input[@type='button' and @value ='Select File']//following-sibling::input[@type='file']")
+        .attachFile("example.json");
+
+        cy.xpath(".//input[@type='button' and @value ='Upload File']").click();
+
+        cy.xpath(".//label[text()='Uploading...']").should('be.visible');
+        cy.xpath(".//label[@id='wfu_messageblock_header_1_label_1']").should('contain',"uploaded successfully");
+    })
+    
 })

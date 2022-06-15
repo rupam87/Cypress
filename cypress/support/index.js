@@ -26,3 +26,4 @@ require('chai');
 require('axe-core');
 require('cypress-axe');
 require('cypress-grep')();
+require('cypress-downloadfile/lib/downloadFileCommand');

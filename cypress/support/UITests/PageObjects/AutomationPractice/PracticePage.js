@@ -86,7 +86,7 @@ handleNewWindow(url){
     // Clicking the new window btn on the app opens a new window
     // but we're calling the alias for the stubbed window object
     // to open the url in the same window
-    this.elements.openNewWinBtn().click()
+    this.elements.openNewWinBtn().click();
     cy.get('@popup').should("be.called");
     
 }

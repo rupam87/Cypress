@@ -38,7 +38,7 @@ describe('File Download/Upload', () => {
     it('File upload example', () => {
         cy.visit('https://practice.automationbro.com/cart/');
         cy.xpath(".//input[@type='button' and @value ='Select File']//following-sibling::input[@type='file']")
-        .attachFile("example.json");
+        .attachFile("Upload/Sunset.jpeg");
 
         cy.xpath(".//input[@type='button' and @value ='Upload File']").click();
 

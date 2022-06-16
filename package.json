@@ -33,7 +33,7 @@
     "cy:run:GreenKart.test1" : "cypress run --spec 'cypress/integration/examples/UITests/GreenKart/GreenKartTests.spec.js' --browser chrome --headed  --env TargetEnvToRun=dev grepTags=@test1",
     "cy:run:AutoPrac.controls" : "cypress run --spec 'cypress/integration/examples/UITests/AutomationPracticeTests.spec.js' --browser chrome --headed --env grepTags=@controls",
     "cy:run:AutoPrac.win" : "cypress run --spec 'cypress/integration/examples/UITests/AutomationPracticeTests.spec.js' --browser chrome --headed --env grepTags=@WinTabs",
-    "cy:run:AutoPrac.FileUpDwnSuite" : "cypress run --spec 'cypress/integration/examples/UITests/AutomationPracticeTests.spec.js' --browser chrome --headed --env grepTags=@FileUpld" 
+    "cy:run:AutoPrac.FileUpDwnSuite" : "cypress run --spec 'cypress/integration/examples/UITests/AutomationPracticeTests.spec.js' --browser chrome --headed --env grepTags=@TestSuite2" 
   },
   "repository": {
     "type": "git",

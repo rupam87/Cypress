@@ -57,6 +57,7 @@ describe('Interact with Iframes', {tags: ['@IframeTests', '@common']}, () =>{
     beforeEach(()=>{
         cy.visit('https://www.rahulshettyacademy.com/AutomationPractice/')
         pracPage.elements.headingText().should('be.visible')
+        cy.log('Heading Text is visible');
         cy.GetIFrameBody(pracPage.elements.coursesIframe()).as('iframe')
     })
 
@@ -65,8 +66,7 @@ describe('Interact with Iframes', {tags: ['@IframeTests', '@common']}, () =>{
             pointer: "mouse",
             position: "center",
             scrollBehavior: "center"
-        }).screenshot().click()
+        }).click()
         cy.get('@iframe').xpath(".//h1[text()='Job Support']").should('exist')
-        cy.screenshot()
     })
 })

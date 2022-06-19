@@ -29,6 +29,6 @@
         "overwrite": false 
       },
     "video": false,
-    "screenshotsFolder": "cypress/reports/MochasomeHtmlReports/assets",
+    "screenshotsFolder": "cypress/reports/mochawesome/assets",
     "screenshotOnRunFailure": true
 }

@@ -16,16 +16,19 @@
         }
     },
     "retries" :{
-        "runMode": 2,
+        "runMode": 1,
         "openMode": 0
     },
-    "reporter": "cypress-mochawesome-reporter",
+    "reporter": "mochawesome",
     "reporterOptions": {
-                        "reportDir": "cypress/reports",
-                        "charts": true,
-                        "reportPageTitle": "My Test Suite",
-                        "embeddedScreenshots": true,
-                        "inlineAssets": true
-     },
-    "video": false
+        "charts": true,
+        "html": true,
+        "json": true,
+        "reportDir": "cypress/reports/mochawesome",
+        "reportFilename": "CypressMochawesomeReport",
+        "overwrite": false 
+      },
+    "video": false,
+    "screenshotsFolder": "cypress/reports/MochasomeHtmlReports/assets",
+    "screenshotOnRunFailure": true
 }

@@ -3,6 +3,7 @@ import { Assertion } from "chai";
 class PracticePage{
 
 elements = {
+    headingText: () => cy.xpath(".//h1[text()='Practice Page']"),
     radioBtnLabel: (label)=> cy.xpath("//div[@id='radio-btn-example']//label").contains(label),
     countriesInput: () => cy.xpath("//input[@id='autocomplete']"),
     selectCountry: (country) => cy.xpath("//ul[@id='ui-id-1']//li/div[contains(text(),'"+country+"')]"),
@@ -12,7 +13,11 @@ elements = {
     alertBtn: () => cy.xpath("//input[@id='alertbtn']"),
     confirmBtn: () => cy.xpath("//input[@id='confirmbtn']"),
     openNewTabBtn: () => cy.get('fieldset>a#opentab'),
-    openNewWinBtn: () => cy.xpath(".//button[@id='openwindow']")
+    openNewWinBtn: () => cy.xpath(".//button[@id='openwindow']"),
+    coursesIframe: () => "//iframe[@id='courses-iframe']",
+    iframe_consultingArrow: () => ".//a[@href='/consulting']//div[@class='arrow-box']",
+    iframe_mentoringArrow: () => ".//a[@href='/mentorship']//div[@class='arrow-box']",
+    iframe_accessArrow: () => ".//a[@href='/lifetime-access']//div[@class='arrow-box']"
 }
 
 selectRadio(option){
@@ -73,14 +78,18 @@ handleNewTab(){
     cy.go('back');
 }
 
-handleNewWindow(url){
-
+handleNewWindow(urlToOpen){
     // Stub the Window Object's Open function to open the 
     // given url when called.
-    cy.window().then((win) => {
-        cy.stub(win, 'open').callsFake((url) => {
-            win.location.href = url;
+    /* cy.window().then((win) => {
+        cy.stub(win, 'open').callsFake(() => {
+            win.location.href = urlToOpen;
         }).as("popup")
+    }); */
+
+    const stub = cy.stub().as('open')
+    cy.on('window:before:load', (win) => {
+        cy.stub(win, 'open').callsFake(stub)
     })
 
     // Clicking the new window btn on the app opens a new window

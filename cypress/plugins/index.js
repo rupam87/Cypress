@@ -1,8 +1,8 @@
-const cypressTypeScriptPreprocessor = require('./cy-ts-preprocessor')
-const fs = require('fs')
-const excelToJson = require('convert-excel-to-json');
+//const cypressTypeScriptPreprocessor = require('./cy-ts-preprocessor')
+///const fs = require('fs')
+//const excelToJson = require('convert-excel-to-json');
 
-module.exports = on => {
+/*module.exports = on => {
   on('file:preprocessor', cypressTypeScriptPreprocessor)
   on('task', {
     getExcelAsJSON(xlsxFileName) {
@@ -15,7 +15,7 @@ module.exports = on => {
       })
     }
   })
-}
+}*/
 
 // cypress/plugins/index.js
 module.exports = (on, config) => {
@@ -26,10 +26,6 @@ module.exports = (on, config) => {
   // as it might have been modified by the plugin
   return config
 }
-
-module.exports = (on, config) => {
-  require('cypress-mochawesome-reporter/plugin')(on);
-};
 
 const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
 module.exports = (on, config) => {

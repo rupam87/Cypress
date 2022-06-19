@@ -89,7 +89,7 @@ context('Testing Controls on AutomationPractice', () => {
     })
 
     it('Interact with iFrames', () => {
-        cy.GetIFrameBody('#courses-iframe').as('iframe')
+        cy.GetIFrameBody(".//*[@id='courses-iframe']").as('iframe');
         cy.get('@iframe').find('.header-upper .main-menu div:nth-child(2) ul').contains('Practice Projects').click()
         cy.get('@iframe').xpath('//h2[contains(text(),\'Join now to Practice\')]').should('be.visible')
     })

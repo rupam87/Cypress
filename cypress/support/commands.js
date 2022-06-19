@@ -41,7 +41,7 @@ Cypress.Commands.add('ReadDataFromTable', (tableHeadersId, rowNum, headerName) =
 
 // Iframe Helper - returns the body DOM element from the IFrame (Must be within same domain)
 Cypress.Commands.add('GetIFrameBody', (frameSel) => {
-  cy.get(frameSel).then($frame => {
+  cy.xpath(frameSel).then($frame => {
     return $frame.contents().find('body')
   })
 })

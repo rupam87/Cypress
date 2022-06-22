@@ -67,15 +67,17 @@ handleJSConfPopup(name, option){
 }
 
 handleNewTab(){
-    this.elements.openNewTabBtn().invoke('removeAttr','target').click();
-    cy.url().should('be.eq','https://www.rahulshettyacademy.com/')
-    cy.xpath(".//div[contains(@class,'header-text')]//h2/span").invoke('prop','outerText').then((oText) => {
-        var actStrippedTxt = (oText).replace(/ /g,'').toLowerCase();
-        var expStrippedTxt = "An Academy to Learn Earn & Shine \u00a0 in your QA Career".replace(/ /g,'').toLowerCase();
-        assert.equal(actStrippedTxt,expStrippedTxt);
-    })
-    
-    cy.go('back');
+    cy.url().then(($currUrl)=>{
+        this.elements.openNewTabBtn().invoke('removeAttr','target').click();
+        cy.url().should('be.eq','https://www.rahulshettyacademy.com/')
+        cy.xpath(".//div[contains(@class,'header-text')]//h2/span").invoke('prop','outerText').then((oText) => {
+            var actStrippedTxt = (oText).replace(/ /g,'').toLowerCase();
+            var expStrippedTxt = "An Academy to Learn Earn & Shine \u00a0 in your QA Career".replace(/ /g,'').toLowerCase();
+            assert.equal(actStrippedTxt,expStrippedTxt);
+        })        
+        cy.go('back');
+        cy.url().should('be.eq', $currUrl);
+    })    
 }
 
 handleNewWindow(urlToOpen){

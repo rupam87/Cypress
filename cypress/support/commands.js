@@ -25,9 +25,9 @@
 // Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
 import 'cypress-wait-until';
 import "cypress-localstorage-commands";
-require('cypress-downloadfile/lib/downloadFileCommand');
 import 'cypress-file-upload';
 require('cy-verify-downloads').addCustomCommand();
+require('cypress-iframe');
 
 // Reads Specific cell data from Table given paramters - TableHeaderId, Row Number (int) and ColHeaderName
 Cypress.Commands.add('ReadDataFromTable', (tableHeadersId, rowNum, headerName) => {

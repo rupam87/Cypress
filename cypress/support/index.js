@@ -27,7 +27,6 @@ require('chai');
 require('axe-core');
 require('cypress-axe');
 require('cypress-grep')();
-require('cypress-downloadfile/lib/downloadFileCommand');
 
 Cypress.on("test:after:run", (test, runnable) => {  
     if (test.state === "failed") {    

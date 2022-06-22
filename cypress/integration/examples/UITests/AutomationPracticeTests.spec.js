@@ -21,7 +21,7 @@ it('Test All Controls', {tags: ['@controls', '@test1'] },() => {
 it('Test Windows and Tabs', {tags: ['@WinTabs','@test2']} ,() => {
    
     pracPage.handleNewTab();
-    pracPage.handleNewWindow('http://www.qaclickacademy.com/');
+    //pracPage.handleNewWindow('http://www.qaclickacademy.com/');
 })
 
 })
@@ -29,13 +29,6 @@ it('Test Windows and Tabs', {tags: ['@WinTabs','@test2']} ,() => {
 
 describe('File Download/Upload', {tags : ['@FileUpldDownld','@common']}, () => {   
     
-    it('File Download using cypress-downloadfile npm package', {tags: '@FileDwnld'}, () => {
-        cy.visit('https://www.rahulshettyacademy.com/AutomationPractice/')
-        cy.downloadFile('https://www.learningcontainer.com/wp-content/uploads/2020/04/sample-text-file.txt',
-            'cypress/fixtures/Download', 'test.txt')
-        cy.readFile('cypress/fixtures/Download/test.txt').should('contain', 'Lorem ipsum dolor sit amet')    
-    })
-
     it('File Download using Button Click', {tags: '@FileDwnldBtn'}, () => {
         cy.visit('https://filesamples.com/formats/csv');
         cy.xpath(".//*[text()='sample1.csv']//parent::div//following-sibling::a").should('be.visible').click();
@@ -61,16 +54,22 @@ describe('Interact with Iframes', {tags: ['@IframeTests', '@common']}, () =>{
         cy.visit('https://www.rahulshettyacademy.com/AutomationPractice/')
         pracPage.elements.headingText().should('be.visible')
         cy.log('Heading Text is visible');
-        cy.GetIFrameBody(pracPage.elements.coursesIframe()).as('iframe')
+       // cy.GetIFrameBody(pracPage.elements.coursesIframe()).as('iframe')
     })
 
     it('Open Consulting Link on IFrame', () => {
-        cy.get('@iframe').xpath(pracPage.elements.iframe_consultingArrow()).realHover({
-            pointer: "mouse",
-            position: "center",
-            scrollBehavior: "center"
-        }).click()
-        
-        cy.get('@iframe').xpath(".//h1[text()='Job Support']").should('exist')
+        cy.frameLoaded('#courses-iframe');        
+        cy.iframe().xpath(pracPage.elements.iframe_consultingArrow()).click();
+        cy.wait(2000)
+        cy.frameLoaded('#courses-iframe'); 
+        cy.waitUntil(()=>{
+            cy.iframe().find('#username').invoke('attr','placeholder').then((val) =>{
+                val === 'Your Name*'
+            })            
+        },{
+            errorMsg: 'Iframe element username is not found.',
+            timeout: 5000, // waits up to 2000 ms, default to 5000
+            interval: 500 // performs the check every 500 ms, default to 200
+          })
     })
 })

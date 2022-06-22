@@ -31,3 +31,8 @@ const {downloadFile} = require('cypress-downloadfile/lib/addPlugin')
 module.exports = (on, config) => {
   on('task', {downloadFile})
 };
+
+const { isFileExist } = require('cy-verify-downloads');
+module.exports = (on, config) => {
+  on('task', { isFileExist })
+}

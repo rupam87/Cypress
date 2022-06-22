@@ -30,5 +30,6 @@
       },
     "video": false,
     "screenshotsFolder": "cypress/reports/mochawesome/assets",
-    "screenshotOnRunFailure": true
+    "screenshotOnRunFailure": true,
+    "downloadsFolder" : "cypress/downloads/Sample"
 }

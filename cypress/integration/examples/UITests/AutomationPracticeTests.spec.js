@@ -28,15 +28,18 @@ it('Test Windows and Tabs', {tags: ['@WinTabs','@test2']} ,() => {
 
 
 describe('File Download/Upload', {tags : ['@FileUpldDownld','@common']}, () => {   
-    beforeEach(()=>{
-        cy.visit('https://www.rahulshettyacademy.com/AutomationPractice/')
-        pracPage.elements.headingText().should('be.visible')
-    })
-
+    
     it('File Download using cypress-downloadfile npm package', {tags: '@FileDwnld'}, () => {
+        cy.visit('https://www.rahulshettyacademy.com/AutomationPractice/')
         cy.downloadFile('https://www.learningcontainer.com/wp-content/uploads/2020/04/sample-text-file.txt',
             'cypress/fixtures/Download', 'test.txt')
         cy.readFile('cypress/fixtures/Download/test.txt').should('contain', 'Lorem ipsum dolor sit amet')    
+    })
+
+    it('File Download using Button Click', {tags: '@FileDwnldBtn'}, () => {
+        cy.visit('https://filesamples.com/formats/csv');
+        cy.xpath(".//*[text()='sample1.csv']//parent::div//following-sibling::a").should('be.visible').click();
+        cy.verifyDownload('sample1.csv', { timeout: 20000, interval: 500 })
     })
 
     it('File upload example', {tags:'@FileUpld'} , () => {
@@ -67,6 +70,7 @@ describe('Interact with Iframes', {tags: ['@IframeTests', '@common']}, () =>{
             position: "center",
             scrollBehavior: "center"
         }).click()
+        
         cy.get('@iframe').xpath(".//h1[text()='Job Support']").should('exist')
     })
 })

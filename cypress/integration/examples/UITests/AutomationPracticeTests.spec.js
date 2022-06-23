@@ -56,26 +56,29 @@ describe('Interact with Iframes', {tags: ['@IframeTests', '@common']}, () =>{
 
     it('Open Consulting Link on IFrame', () => {
         
-       cy.frameLoaded('#courses-iframe')
-       cy.enter('#courses-iframe').then(body => {
-        body().xpath("//a[@href='/consulting']").click();
-       })
-       cy.wait(5000)
-       cy.frameLoaded('#courses-iframe')
-       cy.enter('#courses-iframe').then(body => {
-        body().xpath("//form[@id='consultingForm']//input[@id='username']").scrollIntoView().type('Rupam');
-        body().xpath("//form[@id='consultingForm']//input[@id='mobileno']").type('987643217');
-        body().xpath("//form[@id='consultingForm']//input[@id='email']").type('test@mns.com');
-        body().xpath("//form[@id='consultingForm']//textarea[@id='requirements']").scrollIntoView().type('Dummy Requirements');
-        body().xpath("//form[@id='consultingForm']//select[@id='programming-language']").scrollIntoView().select('Javascript');
-        body().xpath("//form[@id='consultingForm']//select[@id='timezone']").scrollIntoView().select('(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi');
-        body().xpath("//form[@id='consultingForm']//button[text()='Send Message']").scrollIntoView().click();
+       cy.frameLoaded(pracPage.iframeElements.iframeId_css())
+       cy.enter(pracPage.iframeElements.iframeId_css()).then(body => {
+        body().xpath(pracPage.iframeElements.consultingLink_xpath()).click();
+       });
+
+       cy.wait(5000);
+       cy.frameLoaded(pracPage.iframeElements.iframeId_css());
+
+       cy.enter(pracPage.iframeElements.iframeId_css()).then(body => {
+        body().xpath(pracPage.iframeElements.username_xpath()).scrollIntoView().type('Rupam');
+        body().xpath(pracPage.iframeElements.mobileno_xpath()).type('987643217');
+        body().xpath(pracPage.iframeElements.emailid_xpath()).type('test@mns.com');
+        body().xpath(pracPage.iframeElements.requirements_xpath()).scrollIntoView().type('Dummy Requirements');
+        body().xpath(pracPage.iframeElements.programmingDDL_xpath()).scrollIntoView().select('Javascript');
+        body().xpath(pracPage.iframeElements.timezoneDDL_xpath()).scrollIntoView().select('(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi');
+        body().xpath(pracPage.iframeElements.sendMsgBtn_xpath()).scrollIntoView().click();
         cy.wait(5000)
-    })
-    cy.frameLoaded('#courses-iframe')
-    cy.enter('#courses-iframe').then(body => {
-        body().xpath("//div[@class='modal-footer']//button").should('be.visible').click()
-    })
+    });
+
+    cy.frameLoaded(pracPage.iframeElements.iframeId_css());
+    cy.enter(pracPage.iframeElements.iframeId_css()).then(body => {
+        body().xpath(pracPage.iframeElements.closeBtn_xpath()).should('be.visible').click()
+    });
 
     })
 })

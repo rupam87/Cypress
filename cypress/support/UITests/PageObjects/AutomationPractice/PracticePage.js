@@ -20,6 +20,19 @@ elements = {
     iframe_accessArrow: () => ".//a[@href='/lifetime-access']//div[@class='arrow-box']"
 }
 
+iframeElements = {
+    iframeId_css: () => "#courses-iframe",
+    consultingLink_xpath: () => "//a[@href='/consulting']",
+    username_xpath: () => "//form[@id='consultingForm']//input[@id='username']",
+    mobileno_xpath: () => "//form[@id='consultingForm']//input[@id='mobileno']",
+    emailid_xpath: () => "//form[@id='consultingForm']//input[@id='email']",
+    requirements_xpath: () => "//form[@id='consultingForm']//textarea[@id='requirements']",
+    programmingDDL_xpath: () => "//form[@id='consultingForm']//select[@id='programming-language']",
+    timezoneDDL_xpath: () => "//form[@id='consultingForm']//select[@id='timezone']",
+    sendMsgBtn_xpath: () => "//form[@id='consultingForm']//button[text()='Send Message']",
+    closeBtn_xpath: () => "//div[@class='modal-footer']//button"
+}
+
 selectRadio(option){
     this.elements.radioBtnLabel(option).xpath(".//input[@class='radioButton']").click()
 }

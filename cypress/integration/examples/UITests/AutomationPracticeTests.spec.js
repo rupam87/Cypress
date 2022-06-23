@@ -52,24 +52,30 @@ describe('Interact with Iframes', {tags: ['@IframeTests', '@common']}, () =>{
 
     beforeEach(()=>{
         cy.visit('https://www.rahulshettyacademy.com/AutomationPractice/')
-        pracPage.elements.headingText().should('be.visible')
-        cy.log('Heading Text is visible');
-       // cy.GetIFrameBody(pracPage.elements.coursesIframe()).as('iframe')
     })
 
     it('Open Consulting Link on IFrame', () => {
-        cy.frameLoaded('#courses-iframe');        
-        cy.iframe().xpath(pracPage.elements.iframe_consultingArrow()).click();
-        cy.wait(2000)
-        cy.frameLoaded('#courses-iframe'); 
-        cy.waitUntil(()=>{
-            cy.iframe().find('#username').invoke('attr','placeholder').then((val) =>{
-                val === 'Your Name*'
-            })            
-        },{
-            errorMsg: 'Iframe element username is not found.',
-            timeout: 5000, // waits up to 2000 ms, default to 5000
-            interval: 500 // performs the check every 500 ms, default to 200
-          })
+        
+       cy.frameLoaded('#courses-iframe')
+       cy.enter('#courses-iframe').then(body => {
+        body().xpath("//a[@href='/consulting']").click();
+       })
+       cy.wait(5000)
+       cy.frameLoaded('#courses-iframe')
+       cy.enter('#courses-iframe').then(body => {
+        body().xpath("//form[@id='consultingForm']//input[@id='username']").scrollIntoView().type('Rupam');
+        body().xpath("//form[@id='consultingForm']//input[@id='mobileno']").type('987643217');
+        body().xpath("//form[@id='consultingForm']//input[@id='email']").type('test@mns.com');
+        body().xpath("//form[@id='consultingForm']//textarea[@id='requirements']").scrollIntoView().type('Dummy Requirements');
+        body().xpath("//form[@id='consultingForm']//select[@id='programming-language']").scrollIntoView().select('Javascript');
+        body().xpath("//form[@id='consultingForm']//select[@id='timezone']").scrollIntoView().select('(GMT+05:30) Chennai, Kolkata, Mumbai, New Delhi');
+        body().xpath("//form[@id='consultingForm']//button[text()='Send Message']").scrollIntoView().click();
+        cy.wait(5000)
+    })
+    cy.frameLoaded('#courses-iframe')
+    cy.enter('#courses-iframe').then(body => {
+        body().xpath("//div[@class='modal-footer']//button").should('be.visible').click()
+    })
+
     })
 })

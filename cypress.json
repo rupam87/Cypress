@@ -31,5 +31,6 @@
     "video": false,
     "screenshotsFolder": "cypress/reports/mochawesome/assets",
     "screenshotOnRunFailure": true,
-    "downloadsFolder" : "cypress/downloads/Sample"
+    "downloadsFolder" : "cypress/downloads/Sample",
+    "chromeWebSecurity": false
 }

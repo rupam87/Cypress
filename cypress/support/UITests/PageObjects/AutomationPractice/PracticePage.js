@@ -14,10 +14,7 @@ elements = {
     confirmBtn: () => cy.xpath("//input[@id='confirmbtn']"),
     openNewTabBtn: () => cy.get('fieldset>a#opentab'),
     openNewWinBtn: () => cy.xpath(".//button[@id='openwindow']"),
-    coursesIframe: () => "//iframe[@id='courses-iframe']",
-    iframe_consultingArrow: () => ".//a[@href='/consulting']//div[@class='arrow-box']",
-    iframe_mentoringArrow: () => ".//a[@href='/mentorship']//div[@class='arrow-box']",
-    iframe_accessArrow: () => ".//a[@href='/lifetime-access']//div[@class='arrow-box']"
+    coursesIframe: () => "//iframe[@id='courses-iframe']"
 }
 
 iframeElements = {

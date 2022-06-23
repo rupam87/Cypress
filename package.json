@@ -30,6 +30,7 @@
     "cy:run:AutoPrac.FileUpDwnSuite": "cypress run --spec 'cypress/integration/examples/UITests/AutomationPracticeTests.spec.js' --browser chrome --headed --env grepTags=@FileUpldDownld",
     "cy:run:AutoPrac.IframeTests": "cypress run --spec 'cypress/integration/examples/UITests/AutomationPracticeTests.spec.js' --browser chrome --headed --env grepTags=@IframeTests",
     "cy:run:AllAutomationPracticeTests": "cypress run --spec 'cypress/integration/examples/UITests/AutomationPracticeTests.spec.js' --browser chrome --headed --env grepTags=@common",
+    "DemoQATests": "cypress run --spec 'cypress/integration/examples/UITests/DemoQATests.spec.js' --browser chrome --headed --env grepTags=@bookSelectionflow",
     "clean:reports": "if exist cypress\\reports rmdir /S /Q cypress\\reports && mkdir cypress\\reports && mkdir cypress\\reports\\MochasomeHtmlReports",
     "pretest": "npm run clean:reports",
     "scripts": "npm run cy:run:AllAutomationPracticeTests",
